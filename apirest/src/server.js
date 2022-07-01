@@ -1,5 +1,7 @@
 const express = require('express')
 const {PORT}=require('./config');
+const {test}= require('./config/dbc')
+
 
 
 class Servidor{
@@ -7,7 +9,7 @@ class Servidor{
         this.app = express()
         this.port = PORT
 
-        require('./config/dbc').dbc()
+        test()
 
         this.middlewares()
         this.routes()
@@ -18,7 +20,7 @@ class Servidor{
     }
 
     routes(){
-      //  this.app.use('/api/v1/user', require('./routes/user.routes')),
+        this.app.use('/api/v1/user', require('./routes/usuario.routes'))
       //  this.app.use('/api/v1/auto', require('./routes/auto.routes'))
 
     }

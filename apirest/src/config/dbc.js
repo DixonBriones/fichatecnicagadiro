@@ -1,12 +1,25 @@
-const mongoose = require('mongoose')
-const {MONGO_URI}=require('./index');
+const {Pool}=require('pg');
+const {DB_HOST,DB_USER,DB_PASSWORD,DB_DATABASE,DB_PORT}=require('./index');
 
-module.exports.dbc = async () => {
+const DataBaseConfig={
+    host: DB_HOST,
+    user: DB_USER,
+    database:DB_DATABASE,
+    password:DB_PASSWORD,
+    port: DB_PORT,
+    
+}
+
+
+const test = async () => {
     try{
-        await mongoose.connect(MONGO_URI)
+        new Pool(DataBaseConfig)
         console.log('Conexion exitosa con la base de datos')
     }catch(err){
         console.error(err)
         throw new Error('Error de conexion con la base de datos')
     }
 }
+const db=new Pool(DataBaseConfig)
+
+module.exports = {db,test};
