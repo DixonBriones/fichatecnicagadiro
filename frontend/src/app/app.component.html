@@ -1,6 +1,6 @@
-<div class="contenedor">
+<div class="contenedor" *ngIf="authService.isAuth()">
   <app-header></app-header>
 </div>
-
-<router-outlet></router-outlet>
-
+<div>
+  <router-outlet></router-outlet>
+</div>

@@ -1,12 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
+import { InventarioComponent } from './components/inventario/inventario.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
+import { CheckeloginGuard } from './guards/checkelogin.guard';
+
 
 const routes: Routes = [
-  {path: '', redirectTo: '/login', pathMatch:'full'},
+  {path: '', redirectTo: '/inventario', pathMatch:'full'},
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [CheckeloginGuard]
+  },
+  {
+    path: 'inventario',
+    component: InventarioComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

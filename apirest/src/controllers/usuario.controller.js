@@ -44,7 +44,7 @@ const singin = async(req, res, next)=>{
     }else{
         const passwordValidation = await comparePassword(password, existeUser.rows[0].usuario_password)
         if(!passwordValidation){
-          return res.status(400).json({auth:false, token:null})
+          return res.status(200).json({auth:false, token:null})
         }
         const token = jwt.sign({id: existeUser.rows[0].usuario_id}, JWT_SECRET, {
             expiresIn: 60*60*24

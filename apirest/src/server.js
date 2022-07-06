@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require("cors");
 const {PORT}=require('./config');
 const {test}= require('./config/dbc')
 
@@ -17,6 +18,7 @@ class Servidor{
 
     middlewares(){
         this.app.use(express.json())
+        this.app.use(cors())
     }
 
     routes(){

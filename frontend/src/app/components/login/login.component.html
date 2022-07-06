@@ -1,0 +1,21 @@
+
+<div class="container">
+    <div class="card text-center">
+        <article class="card-body">
+            <h4 class="card-title text-center mb-4 mt-1">Iniciar sesion</h4>
+            <form>
+            <div class="form-group">
+                <label >Correo</label>
+                <input [(ngModel)]="user.email" type="email" class="form-control"placeholder="correo@mail.com" name="email">
+            </div> <!-- form-group// -->
+            <div class="form-group">
+                <label >Correo</label>
+                <input [(ngModel)]="user.password" type="password" class="form-control" placeholder="1234" name="password">
+            </div> <!-- form-group// -->
+            <div class="form-group">
+            <button type="submit"  (click)="singIn()" class="btn btn-primary btn-block"> Iniciar sesion  </button>
+            </div> <!-- form-group// -->
+            </form>
+        </article>
+    </div> <!-- card.// -->
+</div>
