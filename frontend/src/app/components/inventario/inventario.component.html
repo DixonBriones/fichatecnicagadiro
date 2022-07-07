@@ -1,1 +1,27 @@
-<p>inventario works!</p>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Numero de serie</th>
+        <th scope="col">Departamento</th>
+        <th scope="col">Tipo Ordenador</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  scope="row" *ngFor="let item of ordenador; index as i">
+        <th>{{i+1}}</th>
+        <td>{{item.ordenador_serie}}</td>
+        <td>{{item.departamento_nombre}}</td>
+        <td>{{item.tipoordenador_nombre}}</td>
+        <td>{{item.ordenador_estado}}</td>
+        <td>
+            <button class="btn btn-secondary">Modificar</button>
+            <button class="btn btn-danger" >Eliminar</button>
+        </td>
+      </tr>
+      
+    </tbody>
+  </table>

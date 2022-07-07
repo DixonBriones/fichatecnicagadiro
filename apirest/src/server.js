@@ -1,6 +1,6 @@
 const express = require('express')
 const cors = require("cors");
-const {PORT}=require('./config');
+const {PORT, DIR_STORAGE}=require('./config');
 const {test}= require('./config/dbc')
 
 
@@ -19,10 +19,13 @@ class Servidor{
     middlewares(){
         this.app.use(express.json())
         this.app.use(cors())
+        //this.app.use(expres)
     }
 
     routes(){
+        this.app.use('/public',express.static(`${__dirname}/storage/img`))
         this.app.use('/api/v1/user', require('./routes/usuario.routes'))
+        this.app.use('/api/v1/ordenador', require('./routes/ordenador.routes'))
       //  this.app.use('/api/v1/auto', require('./routes/auto.routes'))
 
     }
