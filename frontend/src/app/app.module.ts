@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 //Providers
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { CookieService } from 'ngx-cookie-service';
+import { ComponenteComponent } from './components/componente/componente.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { CookieService } from 'ngx-cookie-service';
     MarcaComponent,
     InventarioComponent,
     FooterComponent,
-    OrdenadorComponent
+    OrdenadorComponent,
+    ComponenteComponent
   ],
   imports: [
     BrowserModule,

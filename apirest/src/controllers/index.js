@@ -1,6 +1,7 @@
 module.exports.controllers = {
 
     ApiUserController : require('./usuario.controller'),
-    ApiOrdenadorController: require('./ordenador.controller')
+    ApiOrdenadorController: require('./ordenador.controller'),
+    ApiComponenteController:require('./componente.controller')
     
 }
