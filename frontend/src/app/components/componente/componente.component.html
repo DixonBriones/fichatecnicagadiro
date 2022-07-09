@@ -1,3 +1,6 @@
+<!-- Alerts-->
+<div id="liveAlertPlaceholder"></div>
+
 <div class="container">        
     <div class="contenedor-boton">
         <button type="button" class="btn btn-primary " id="buttonIngreso"data-bs-toggle="modal" data-bs-target="#formModal" >Agregar componente</button>
@@ -13,8 +16,8 @@
                             <p class="card-text">Componente: {{item.tipocomponente_nombre}}</p>
                             <p class="card-text">Marca: {{item.marca_nombre}}</p>
                             <div class="grupo-botones">
-                                <button (click)="mostrarid(item.componente_id)"  type="button" class="btn btn-primary " id="buttonEditar" >Editar</button>
-                                <button type="button" class="btn btn-danger" id="buttonEliminar" >Eliminar</button>
+                                <button (click)="ComponenteID(item.componente_id)"  type="button" class="btn btn-primary " id="buttonEditar" data-bs-toggle="modal" data-bs-target="#formModalModificar" >Editar</button>
+                                <button (click)="DeleteComponente(item.componente_id)" type="button" class="btn btn-danger" id="buttonEliminar" >Eliminar</button>
                             </div>
                           
                         </div>
@@ -26,7 +29,9 @@
 </div>
 
 
-<!-- Modal -->
+
+
+<!-- Modal ingreso -->
 <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog ">
       <div class="modal-content">
@@ -70,3 +75,49 @@
       </div>
     </div>
   </div>
+
+
+<!-- Modal Modificar -->
+<div class="modal fade" id="formModalModificar" tabindex="-1" aria-labelledby="formModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="formModalCenterTitle">Modificar componente</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+          <form class="row g-3" enctype="multipart/form-data" >
+              <div class="col-12">
+                <label for="inputNombre" class="form-label">Nombre del componente</label>
+                <input type="text" class="form-control" id="inputNombre" [(ngModel)]="modificarComponente.componente_nombre" name="nombre">
+              </div>
+              <div class="col-md-6">
+                <label for="inputMarca" class="form-label">Marca</label>
+                <select id="inputMarca" class="form-select"  [(ngModel)]="modificarComponente.componente_marcaid" name="marca" >
+                  <option selected hidden value="">Escoja la marca</option>
+                  <option *ngFor="let item of marca" value="{{item.marca_id}}" >{{item.marca_nombre}}</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="inputTipo" class="form-label">Tipo de componente</label>
+                <select id="inputTipo" class="form-select"  [(ngModel)]="modificarComponente.componente_tipoid" name="tipo">
+                  <option selected hidden>Escoja el tipo de componente</option>
+                  <option *ngFor="let item of tipoComponente" value="{{item.tipocomponente_id}}" >{{item.tipocomponente_nombre}}</option>
+                </select>
+              </div>
+              <div class="col-md-12">
+                  <label for="inputFoto" class="form-label" >Imagen del componente</label>
+                  <input (change)="getFile($event)" type="file" id="inputFoto" title="Seleccione una imagen" accept=".png,.jpg" [(ngModel)]="modificarComponente.imagen" name="imagen">
+              </div>
+
+            </form>
+
+      </div>
+      <div class="modal-footer">
+        <button id="cerrarboton2" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary"  (click)="ModificarComponente(modificarComponente.componente_id)" >Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>

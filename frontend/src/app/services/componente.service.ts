@@ -24,6 +24,16 @@ export class ComponenteService {
   insertComponente(body:FormData) {
     return this.http.post(`${this.URL}/insertComponente`,body);
   }
+  deleteComponente(id:any) {
+    return this.http.delete(`${this.URL}/eliminarComponente/${id}`);
+  }
+  componenteID(id:any) {
+    return this.http.get(`${this.URL}/busquedaid/${id}`);
+  }
+  actualizarComponente(body:FormData,id:any) {
+    return this.http.put(`${this.URL}/actualizarComponente/${id}`,body);
+  }
+  
 
 
 
