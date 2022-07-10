@@ -1,27 +1,167 @@
+<!-- Alerts-->
+<div id="liveAlertPlaceholder"></div>
 
-<table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Numero de serie</th>
-        <th scope="col">Departamento</th>
-        <th scope="col">Tipo Ordenador</th>
-        <th scope="col">Estado</th>
-        <th scope="col">Opciones</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr  scope="row" *ngFor="let item of ordenador; index as i">
-        <th>{{i+1}}</th>
-        <td>{{item.ordenador_serie}}</td>
-        <td>{{item.departamento_nombre}}</td>
-        <td>{{item.tipoordenador_nombre}}</td>
-        <td>{{item.ordenador_estado}}</td>
-        <td>
-            <button class="btn btn-secondary">Modificar</button>
-            <button class="btn btn-danger" >Eliminar</button>
-        </td>
-      </tr>
-      
-    </tbody>
-  </table>
+<div class="container">        
+    <div class="contenedor-boton">
+        <button type="button" class="btn btn-primary " id="buttonIngreso" data-bs-toggle="modal" data-bs-target="#formModal" >Agregar Ordenador</button>
+    </div>
+    <div class="app flex-row align-items-center">   
+        <div class="container"> 
+            <div class="card-deck row">
+                <div class="card col-md-3" *ngFor="let item of ordenador">
+                    <div class="card-block">
+                        <img class="card-img-top" [src]="item.ordenador_foto"  alt="Card image cap">
+                        <h5 class="card-header">{{item.ordenador_serie}}</h5>
+                        <div class="card-body">
+                            <p class="card-text">Departamento: {{item.departamento_nombre}}</p>
+                            <p class="card-text">Tipo de ordenador: {{item.tipoordenador_nombre}}</p>
+                            <p class="card-text">Estado: {{item.ordenador_estado}}</p>
+                            <div class="grupo-botones">
+                                <button (click)="OrdenadorID(item.ordenador_id)" type="button" class="btn btn-primary " id="buttonEditar"  data-bs-toggle="modal" data-bs-target="#formModalModificar"  >Editar</button>
+                                <button (click)="DeleteOrdenador(item.ordenador_id)" type="button" class="btn btn-danger" id="buttonEliminar" >Eliminar</button>
+                            </div>
+                          
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal ingreso -->
+<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="formModalCenterTitle">Registar ordenador</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+            <form class="row g-3" enctype="multipart/form-data" [formGroup]="nuevoOrdenadorForm"  >
+                <!-- Numero de serie-->
+                <div class="col-12">
+                    <label for="inputNombre" class="form-label">Numero de serie</label>
+                    <input type="text" class="form-control" id="inputNombre" formControlName="serie">
+                </div>
+                <!-- Fecha adquisicion -->
+                <div class="col-6">
+                    <label for="inputfechaad" class="form-label">Fecha de adquisicion</label>
+                    <input type="date" class="form-control" id="inputfechaad" formControlName="fechaAquisicion">
+                </div>
+                <!-- Numero fin garantia-->
+                <div class="col-6">
+                    <label for="inputFin" class="form-label">Fecha del fin de garantia</label>
+                    <input type="date" class="form-control" id="inputFin" formControlName="fechaFinGarantia">
+                </div>
+                <!-- Foto ordenador-->
+                <div class="col-md-12">
+                    <label for="inputFoto" class="form-label" >Imagen del ordenador</label>
+                    <input class="form-control" (change)="getFile($event)" type="file" id="inputFoto" title="Seleccione una imagen" accept=".png,.jpg" >
+                </div>
+                <!-- Select Departamento-->
+                <div class="col-md-6">
+                    <label for="inputDepartamento" class="form-label">Departamento</label>
+                    <select id="inputDepartamento" class="form-select" formControlName="departamento" >
+                        <option selected hidden >Escoja componente</option>
+                        <option *ngFor="let item of departamentoLista" value="{{item.departamento_id}}" >{{item.departamento_nombre}}</option>
+                    </select>
+                  </div>
+                <!-- Select tipo ordenador-->
+                  <div class="col-md-6">
+                    <label for="inputTipo" class="form-label">Tipo de ordenador</label>
+                    <select id="inputTipo" class="form-select" formControlName="tipoordenador" >
+                        <option selected hidden >Escoja componente</option>
+                        <option *ngFor="let item of tipoOrdenadorLista" value="{{item.tipoordenador_id}}" >{{item.tipoordenador_nombre}}</option>
+                    </select>
+                </div>
+                <!-- Select componentes-->
+                <div class="col-6"  formArrayName="componentes">
+                    <ng-container *ngFor="let componente of componentes.controls; let i=index">
+                        <div [formGroupName]="i" >
+                            <label for="inputComponente" class="form-label">Componente <span (click)="removecomponente(i)">X</span> </label>
+                            <select id="inputComponente" class="form-select" formControlName="componenteid" >
+                                <option selected hidden >Escoja componente</option>
+                                <option *ngFor="let item of componenteLista" value="{{item.componente_id}}" >{{item.componente_nombre}}</option>
+                            </select>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="col-md-6" formArrayName="componentes">
+                    <ng-container *ngFor="let componente of componentes.controls; let i=index">
+                        <div [formGroupName]="i" >
+                            <label for="inputSerialComponente" class="form-label">Serial del componente</label>
+                            <input type="text" class="form-control" id="inputSerialComponente" formControlName="componenteserial">
+                        </div>
+                    </ng-container>
+                </div>
+
+                <!-- Select Software-->
+                <div class="col-12"  formArrayName="softwares">
+                    <ng-container *ngFor="let software of softwares.controls; let i=index">
+                        <div  [formGroupName]="i" >
+                            <label for="inputsoftware" class="form-label">Software <span (click)="removesoftware(i)">X</span> </label>
+                            <select id="inputsoftware" class="form-select" formControlName="softwareid" >
+                                <option selected hidden >Escoja el software</option>
+                                <option *ngFor="let item of softwareLista" value="{{item.software_id}}" >{{item.software_nombre}}</option>
+                            </select>
+                        </div>
+                    </ng-container>
+                </div>
+
+                <div class="col-6" id="grupoBotones">
+                    <button (click)="addcomponente()"  type="button" class="btn btn-info">Agregar Componente</button>
+                </div>
+                <div class="col-6"  id="grupoBotones">
+                    <button (click)="addsoftware()"  type="button" class="btn btn-info">Agregar Software</button>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button id="cerrarboton" type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Cerrar</button>
+          <button type="button" class="btn btn-primary" (click)="InsertarOrdenador()">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal Modificar -->
+<div class="modal fade" id="formModalModificar" tabindex="-1" aria-labelledby="formModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="formModalCenterTitle">Modificar componente</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+  
+            <form class="row g-3" >
+                <div class="col-md-6">
+                    <label for="inputTipo" class="form-label">Departamento</label>
+                    <select id="inputTipo" class="form-select"  [(ngModel)]="modificarOrdenador.ordenador_departamentoid" name="ordenador_departamentoid">
+                      <option selected hidden>Escoja el tipo de componente</option>
+                      <option *ngFor="let item of departamentoLista" value="{{item.departamento_id}}" >{{item.departamento_nombre}}</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="inputTipo" class="form-label">Estado</label>
+                    <select id="inputTipo" class="form-select"  [(ngModel)]="modificarOrdenador.ordenador_estado" name="ordenador_estado">
+                      <option selected hidden>Escoja el tipo de componente</option>
+                      <option>Activo</option>
+                      <option>En mantenimiento</option>
+                      <option>Desuso</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button id="cerrarboton2" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary"  (click)="ModificarOrdenador(modificarOrdenador.ordenador_id)" >Guardar cambios</button>
+        </div>
+      </div>
+    </div>
+  </div>

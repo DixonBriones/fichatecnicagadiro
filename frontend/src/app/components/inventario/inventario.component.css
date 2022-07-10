@@ -1,0 +1,19 @@
+.contenedor-boton{
+    text-align: right;
+}
+#buttonIngreso{
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+}
+
+#buttonEliminar{
+    float: right;
+}
+img{
+    margin-top: 5px;
+}
+
+#grupoBotones{
+    text-align: center;
+}

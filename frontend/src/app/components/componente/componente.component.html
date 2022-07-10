@@ -10,7 +10,7 @@
             <div class="card-deck row">
                 <div class="card col-md-2" *ngFor="let item of componente">
                     <div class="card-block">
-                        <img class="card-img-top" [src]="item.componente_fotourl"  alt="Card image cap">
+                        <img class="card-img-top" [src]="item.componente_fotourl"  alt="Card image cap" width="115px" height="115px">
                         <h5 class="card-header">{{item.componente_nombre}}</h5>
                         <div class="card-body">
                             <p class="card-text">Componente: {{item.tipocomponente_nombre}}</p>
@@ -62,11 +62,10 @@
                 </div>
                 <div class="col-md-12">
                     <label for="inputFoto" class="form-label" >Imagen del componente</label>
-                    <input (change)="getFile($event)" type="file" id="inputFoto" title="Seleccione una imagen" accept=".png,.jpg" [(ngModel)]="nuevoComponente.imagen" name="imagen">
+                    <input class="form-control" (change)="getFile($event)" type="file" id="inputFoto" title="Seleccione una imagen" accept=".png,.jpg" [(ngModel)]="nuevoComponente.imagen" name="imagen">
                 </div>
 
               </form>
-
         </div>
         <div class="modal-footer">
           <button id="cerrarboton" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -108,7 +107,7 @@
               </div>
               <div class="col-md-12">
                   <label for="inputFoto" class="form-label" >Imagen del componente</label>
-                  <input (change)="getFile($event)" type="file" id="inputFoto" title="Seleccione una imagen" accept=".png,.jpg" [(ngModel)]="modificarComponente.imagen" name="imagen">
+                  <input class="form-control"  (change)="getFile($event)" type="file" id="inputFoto" title="Seleccione una imagen" accept=".png,.jpg" [(ngModel)]="modificarComponente.imagen" name="imagen">
               </div>
 
             </form>
