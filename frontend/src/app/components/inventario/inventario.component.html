@@ -11,7 +11,7 @@
                 <div class="card col-md-3" *ngFor="let item of ordenador">
                     <div class="card-block">
                         <img class="card-img-top" [src]="item.ordenador_foto"  alt="Card image cap">
-                        <h5 class="card-header">{{item.ordenador_serie}}</h5>
+                        <h5 class="card-header" ><a routerLink="/inventario/{{item.ordenador_id}}" >{{item.ordenador_serie}} </a></h5>
                         <div class="card-body">
                             <p class="card-text">Departamento: {{item.departamento_nombre}}</p>
                             <p class="card-text">Tipo de ordenador: {{item.tipoordenador_nombre}}</p>

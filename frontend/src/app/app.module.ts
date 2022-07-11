@@ -21,6 +21,7 @@ import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { CookieService } from 'ngx-cookie-service';
 import { ComponenteComponent } from './components/componente/componente.component';
 import { FichaComponent } from './components/ficha/ficha.component';
+import { MantenimientoComponent } from './components/mantenimiento/mantenimiento.component';
 
 
 
@@ -34,7 +35,8 @@ import { FichaComponent } from './components/ficha/ficha.component';
     FooterComponent,
     OrdenadorComponent,
     ComponenteComponent,
-    FichaComponent
+    FichaComponent,
+    MantenimientoComponent
   ],
   imports: [
     BrowserModule,
