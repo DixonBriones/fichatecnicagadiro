@@ -27,7 +27,7 @@ class Servidor{
         this.app.use('/api/v1/user', require('./routes/usuario.routes'))
         this.app.use('/api/v1/ordenador', require('./routes/ordenador.routes'))
         this.app.use('/api/v1/componente', require('./routes/componente.routes'))
-      //  this.app.use('/api/v1/auto', require('./routes/auto.routes'))
+        this.app.use('/api/v1/ficha', require('./routes/ficha.routes'))
 
     }
 

@@ -42,6 +42,4 @@ export class OrdenadorService {
     return this.http.put(`${this.URL}/modificarordenador/${id}`,body);
   }
 
-
-
 }

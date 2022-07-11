@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
@@ -19,6 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { CookieService } from 'ngx-cookie-service';
 import { ComponenteComponent } from './components/componente/componente.component';
+import { FichaComponent } from './components/ficha/ficha.component';
+
 
 
 @NgModule({
@@ -30,7 +33,8 @@ import { ComponenteComponent } from './components/componente/componente.componen
     InventarioComponent,
     FooterComponent,
     OrdenadorComponent,
-    ComponenteComponent
+    ComponenteComponent,
+    FichaComponent
   ],
   imports: [
     BrowserModule,

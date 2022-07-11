@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="contenedor-boton">
+    <button type="button" class="btn btn-primary " id="buttonIngreso" (click)="crearPdf()" >Generar PDF</button>
+</div>
+</div>
+
+<div class="container" id="FichaTecnica">
+    <p class="fs-2 fw-bold text-center">Ficha tecnica</p>
+    <div *ngFor="let item of ordenador; let i=index">
+        <div class="row">
+            <div class="col-6 col-md-4">
+                <img [src]="item.ordenador_foto" alt="" class="img-fluid" >
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col">
+                        <strong>Numero de serie</strong>
+                      </div>
+                      <div class="col">
+                        {{item.ordenador_serie}}
+                      </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <strong>Departamento</strong>
+                      </div>
+                      <div class="col">
+                        {{item.departamento_nombre}}
+                      </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <strong>Tipo de ordenador</strong>
+                      </div>
+                      <div class="col">
+                        {{item.tipoordenador_nombre}}
+                      </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <strong>Estado</strong>
+                      </div>
+                      <div class="col">
+                        {{item.ordenador_estado}}
+                      </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <strong>Fecha de adquisicion</strong>
+                      </div>
+                      <div class="col">
+                        {{item.ordenador_fechaadquisicion | date:'shortDate'}}
+                      </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <strong>Final de la garantia</strong>
+                      </div>
+                      <div class="col">
+                        {{item.ordenador_fechafingarantia | date:'shortDate'}}
+                      </div>
+                </div>
+            </div>
+        </div>   
+    </div>
+    <div class="container">
+      <p class="fs-3 fw-bold">Hardware</p>
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Tipo componente</th>
+              <th scope="col">Marca</th>
+              <th scope="col">Modelo</th>
+              <th scope="col">Serial del Hardware</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr  scope="row" *ngFor="let item of listaComponentes; index as i">
+              <th>{{i+1}}</th>
+              <td>{{item.tipocomponente_nombre}}</td>
+              <td>{{item.marca_nombre}}</td>
+              <td>{{item.componente_nombre}}</td>
+              <td>{{item.ordenadorcomponente_serial}}</td>
+            </tr>
+      
+          </tbody>
+  
+      </table> 
+  
+      <p class="fs-3 fw-bold">Software</p>
+      <table class="table table-striped">
+          <thead>
+              <tr>
+                <th scope="col">#</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr  scope="row" *ngFor="let item of listaSoftware; index as i">
+                  <th>{{i+1}}</th>
+                  <td>{{item.software_nombre}}</td>
+              </tr>
+          </tbody>
+      </table> 
+  </div>
+</div>
+

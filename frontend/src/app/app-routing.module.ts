@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { InventarioComponent } from './components/inventario/inventario.component';
 import { LoginComponent } from './components/login/login.component';
 import {ComponenteComponent} from './components/componente/componente.component'
+import {FichaComponent} from './components/ficha/ficha.component'
 
 import { AuthGuard } from './guards/auth.guard';
 import { CheckeloginGuard } from './guards/checkelogin.guard';
@@ -24,7 +25,13 @@ const routes: Routes = [
     path: 'componente',
     component: ComponenteComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'inventario/:id',
+    component: FichaComponent,
+    canActivate: [AuthGuard]
   }
+
 ];
 
 @NgModule({
