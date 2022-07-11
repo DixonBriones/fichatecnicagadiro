@@ -1,1 +1,104 @@
-<p>mantenimiento works!</p>
+<div id="liveAlertPlaceholder"></div>
+
+<div class="container">
+    <div class="contenedor-boton">
+      <button type="button" class="btn btn-primary " id="buttonIngreso" data-bs-toggle="modal" data-bs-target="#formModal"  >Ingresar mantenimiento</button>
+  </div>
+</div>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Fecha de mantenimiento</th>
+            <th scope="col">Serial del ordenador</th>
+            <th scope="col">Tecnico encargado</th>
+            <th scope="col">Observaciones</th>
+            <th scope="col">Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr scope="row" *ngFor="let item of listaMatenimiento; index as i" >
+              <th>{{i+1}}</th>
+              <td class="text-center">{{item.mantenimiento_fecha | date:'shortDate'}}</td>
+              <td>{{item.ordenador_serie}}</td>
+              <td>{{item.empleado_nombre}} {{item.empleado_apellido}}</td>
+              <td>{{item.mantenimiento_observacion}}</td>
+              <td>
+                  <button class="btn btn-secondary" (click)="GetMantenimiento(item.mantenimiento_id)" data-bs-toggle="modal" data-bs-target="#formModalModificar" >Modificar</button>
+                  <button class="btn btn-danger" (click)="DeleteMantenimiento(item.mantenimiento_id)"  >Eliminar</button>
+              </td>
+            </tr>
+        </tbody>
+    </table> 
+</div>
+
+<!-- Modal ingreso -->
+<div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="formModalCenterTitle">Registar mantenimiento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+          <form class="row g-3"  >
+            <div class="col-md-6">
+              <label for="inputMarca" class="form-label">Tecnico</label>
+              <select id="inputMarca" class="form-select"  [(ngModel)]="nuevoMantenimiento.tecnico" name="tecnico" >
+                <option selected hidden value="">Escoja la marca</option>
+                <option *ngFor="let item of listaTecnico" value="{{item.empleado_id}}" >{{item.empleado_nombre}} {{item.empleado_apellido}}</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="inputfechaad" class="form-label">Fecha de mantenimiento</label>
+              <input type="date" class="form-control" id="inputfechaad" [(ngModel)]="nuevoMantenimiento.fechaMantenimiento" name="fechaMantenimiento">
+          </div>
+          <div class="col-12">
+            <label for="inputMarca" class="form-label">Ordenador</label>
+            <select  size="4" id="inputMarca" class="form-select"  [(ngModel)]="nuevoMantenimiento.ordenador" name="ordenador" >
+              <option selected hidden value="">Escoja la marca</option>
+              <option *ngFor="let item of listaOrdenador" value="{{item.ordenador_id}}" >{{item.ordenador_serie}}</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <label for="textAreaObservaciones" class="form-label">Observaciones</label>
+            <textarea class="form-control" id="textAreaObservaciones" rows="3" [(ngModel)]="nuevoMantenimiento.observaciones" name="observaciones"></textarea>
+          </div>
+          </form>
+      </div>
+      <div class="modal-footer">
+        <button id="cerrarboton" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="GuardarMantenimiento()">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Modificar -->
+<div class="modal fade" id="formModalModificar" tabindex="-1" aria-labelledby="formModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="formModalCenterTitle">Modificar mantenimiento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form class="row g-3"  >
+            <div class="col-12">
+              <label for="textAreaObservaciones" class="form-label">Observaciones</label>
+              <textarea class="form-control" id="textAreaObservaciones" rows="3" [(ngModel)]="mantenimiento.mantenimiento_observacion" name="mantenimiento_observacion"></textarea>
+            </div>
+          </form>
+
+
+      </div>
+      <div class="modal-footer">
+        <button id="cerrarboton2" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary"  (click)="ActualizarMantenimiento(mantenimiento.mantenimiento_id)" >Guardar cambios</button>
+      </div>
+    </div>
+  </div>
+</div>

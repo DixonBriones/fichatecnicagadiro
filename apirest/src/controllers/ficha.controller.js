@@ -35,9 +35,19 @@ const getOrdenadorFicha = async(req, res, next)=>{
     'where ordenador_id = $1',[id])
     res.status(200).json(ordenador.rows); 
 }
+const getMantenimientoFicha = async(req, res, next)=>{
+    const {id} = req.params;
+    const ordenador=  await db.query('select mantenimiento_fecha, mantenimiento_observacion, '+
+    'empleado_nombre,empleado_apellido from mantenimiento '+
+    'inner join empleado on '+
+    'mantenimiento.mantenimiento_tecnicoid = empleado.empleado_id '+
+    'where mantenimiento_ordenadorid = $1',[id])
+    res.status(200).json(ordenador.rows); 
+}
 
 module.exports={
     getComponentesFicha,
     getSoftwereFicha,
-    getOrdenadorFicha
+    getOrdenadorFicha,
+    getMantenimientoFicha
 }

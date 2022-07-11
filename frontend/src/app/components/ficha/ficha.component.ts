@@ -13,8 +13,10 @@ import html2canvas from 'html2canvas';
 export class FichaComponent implements OnInit {
   listaComponentes:any=[]
   listaSoftware:any=[]
+  listaMantenimiento:any=[]
   ordenador:any
   public id:any;
+  
   constructor(private route:ActivatedRoute, private fichaService: FichaService) { 
     this.id=this.route.snapshot.params['id'];
   }
@@ -24,6 +26,7 @@ export class FichaComponent implements OnInit {
     this.MostarComponentes()
     this.MostarSoftware()
     this.MostarOrdenador()
+    this.MostarMantenimiento()
   }
 
   MostarComponentes(){
@@ -44,7 +47,13 @@ export class FichaComponent implements OnInit {
       console.log(this.ordenador)
     })
   }
-
+  MostarMantenimiento(){
+    this.fichaService.mostrarMantenimiento(this.id).subscribe((res)=>{
+      this.listaMantenimiento=res
+      console.log(this.listaMantenimiento)
+    })
+  }
+ 
   crearPdf(){
         // Extraemos el
         const DATA:any = document.getElementById('FichaTecnica');

@@ -21,11 +21,10 @@ export class LoginComponent implements OnInit {
   singIn() {
     this.authService.singin(this.user).subscribe((res: any) => {
       if (res.token == null) {
-        //console.log('errro');
         alert("error")
       } else {
+        this.cookieService.set('usuario', res.usauario)
         this.cookieService.set('token', res.token);
-        alert("sesion iniciada")
         this.router.navigate(['/','inventario']);
       }
     });

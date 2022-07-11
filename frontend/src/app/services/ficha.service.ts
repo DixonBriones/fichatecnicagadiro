@@ -20,6 +20,9 @@ export class FichaService {
     mostrarOrdenador(id:any){
         return this.http.get(`${this.URL}/busquedaOrdenadorid/${id}`);
     }
+    mostrarMantenimiento(id:any){
+      return this.http.get(`${this.URL}/busquedaMantenimientoid/${id}`);
+  }
 
 
 

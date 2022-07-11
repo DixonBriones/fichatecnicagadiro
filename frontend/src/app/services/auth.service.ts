@@ -15,6 +15,7 @@ export class AuthService {
   singin(user: any) {
     return this.http.post(`${this.URL}/singin`, user);
   }
+  
 
   //*Verificamos si existe una seccion activa del lado del servidor
   isAuth(): boolean {

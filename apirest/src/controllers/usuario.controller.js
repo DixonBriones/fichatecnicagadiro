@@ -38,7 +38,9 @@ const singup = async(req, res, next)=>{
 
 const singin = async(req, res, next)=>{
     const { email, password} = req.body
-    const existeUser = await db.query("Select * from usuario where usuario_correo = $1",[email])
+    const existeUser = await db.query("Select * from usuario "+
+                                        "inner join empleado on usuario.usuario_empleadoid = empleado.empleado_id "+
+                                        "where usuario_correo = $1",[email])
     if(existeUser.rowCount==0){
         return res.status(404).json({msg: `El correo no esta registrado`})
     }else{
@@ -49,7 +51,7 @@ const singin = async(req, res, next)=>{
         const token = jwt.sign({id: existeUser.rows[0].usuario_id}, JWT_SECRET, {
             expiresIn: 60*60*24
         })
-        res.status(200).json({auth: true, token});
+        res.status(200).json({auth: true, token, usauario: existeUser.rows[0].empleado_nombre + ' '+ existeUser.rows[0].empleado_apellido});
 
     }
 }
