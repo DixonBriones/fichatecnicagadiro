@@ -8,7 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
   providedIn: 'root',
 })
 export class AuthService {
-  private URL = 'http://localhost:3000/api/v1/user';
+  private URL = 'https://apigadiro.herokuapp.com/api/v1/user';
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService,private cookieService: CookieService) {}
 

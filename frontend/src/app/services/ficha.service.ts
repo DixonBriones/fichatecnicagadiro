@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class FichaService {
-  private URL = 'http://localhost:3000/api/v1/ficha';
+  private URL = 'https://apigadiro.herokuapp.com/api/v1/ficha';
 
   constructor(private http: HttpClient) {}
 

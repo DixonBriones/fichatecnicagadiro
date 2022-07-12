@@ -8,7 +8,7 @@ import { HttpHeaders } from '@angular/common/http';
   providedIn: 'root',
 })
 export class ComponenteService {
-  private URL = 'http://localhost:3000/api/v1/componente';
+  private URL = 'https://apigadiro.herokuapp.com/api/v1/componente';
 
   constructor(private http: HttpClient) {}
 

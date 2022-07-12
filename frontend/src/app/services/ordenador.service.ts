@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class OrdenadorService {
-  private URL = 'http://localhost:3000/api/v1/ordenador';
+  private URL = 'https://apigadiro.herokuapp.com/api/v1/ordenador';
 
   constructor(private http: HttpClient) {}
 
