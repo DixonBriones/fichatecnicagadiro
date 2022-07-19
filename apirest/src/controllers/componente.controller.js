@@ -1,6 +1,8 @@
 const {response}=require('express');
 const { HOST, PORT } = require('../config');
 const {db}= require('../config/dbc');
+const cloudinary = require("../config/cloudinary");
+const upload = require("../middlewares/uploadimg");
 
 const getMarca = async(req, res, next)=>{
  //  if(req.file){
@@ -32,21 +34,30 @@ const getComponenteID=async(req, res, next)=>{
     const tipo=  await db.query('SELECT * FROM componente where componente_id = $1',[id])
     res.status(200).json(tipo.rows); 
 }
-
+/*
 const insertComponente=async(req, res, next)=>{
     const {nombre,marca,tipo}=req.body
     const{filename}=req.file
     const URLIMG = setUrl(filename)
     await db.query('Insert into componente values (default, $1, $2, $3, $4)',[nombre,tipo,marca,URLIMG]);
     res.status(200).json({msg:"Componente insertado de manera exitosa"}); 
- }
+ }*/
 
+ const insertComponente=async(req, res, next)=>{
+    const {nombre,marca,tipo}=req.body
+    const result = await cloudinary.uploader.upload(req.file.path);
+    const URLIMG = result.url
+    await db.query('Insert into componente values (default, $1, $2, $3, $4)',[nombre,tipo,marca,URLIMG]);
+    res.status(200).json({msg:"Componente insertado de manera exitosa"}); 
+ }
+/*
   const actualizarComponente= async (req, res,next)=>{
     const {id} = req.params;
     let {nombre,marca,tipo,fotoactual} =  req.body;
     if(req.file){
         const{filename}=req.file
         fotoactual = setUrl(filename)
+        
     
     }
     try{
@@ -60,8 +71,27 @@ const insertComponente=async(req, res, next)=>{
         res.status(404).json({msg:"Existe un error al momento de eliminar",error:error}); 
     }
   }
-  
-
+  */
+  const actualizarComponente= async (req, res,next)=>{
+    const {id} = req.params;
+    let {nombre,marca,tipo,fotoactual} =  req.body;
+    if(req.file){
+        const result = await cloudinary.uploader.upload(req.file.path);
+        fotoactual = result.url
+        
+    
+    }
+    try{
+        await db.query('UPDATE componente '+
+        'SET componente_nombre = $1, componente_tipoid= $2, componente_marcaid= $3, '+
+        'componente_fotourl = $4 '+
+        'WHERE componente_id = $5 ',[nombre,tipo,marca,fotoactual,id]);
+        res.status(200).json({msg:"Componente modificado de manera exitosa"}); 
+    }
+    catch (error){
+        res.status(404).json({msg:"Existe un error al momento de eliminar",error:error}); 
+    }
+  }
   const borrarComponente= async (req, res ,next)=>{
     const {id} = req.params;
     try{

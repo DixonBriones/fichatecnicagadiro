@@ -12,5 +12,8 @@ module.exports= {
     DB_PORT:process.env.DB_PORT,
     JWT_SECRET:process.env.JWT_SECRET,
     HOST:process.env.HOST,
-    DIR_STORAGE:process.env.DIR_STORAGE
+    DIR_STORAGE:process.env.DIR_STORAGE,
+    CLOUDNAME:process.env.CLOUDNAME,
+    APICLOUD:process.env.APICLOUD,
+    SECRETCLOUD:process.env.SECRETCLOUD
 }

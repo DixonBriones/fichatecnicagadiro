@@ -1,4 +1,20 @@
-const multer= require('multer')
+const multer = require("multer");
+const path = require("path");
+
+// Multer config
+module.exports = multer({
+  storage: multer.diskStorage({}),
+  fileFilter: (req, file, cb) => {
+    let ext = path.extname(file.originalname);  
+    if (ext !== ".jpg" && ext !== ".jpeg" && ext !== ".png") {
+      cb(new Error("File type is not supported"), false);
+      return;
+    }
+    cb(null, true);
+  },
+});
+
+/*const multer= require('multer')
 const { DIR_STORAGE } = require('../config')
 const fs =require('fs') 
 const storage = multer.diskStorage({
@@ -15,3 +31,4 @@ const storage = multer.diskStorage({
   const upload = multer({ storage: storage })
 
   module.exports= upload
+*/

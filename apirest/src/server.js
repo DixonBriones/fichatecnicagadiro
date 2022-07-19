@@ -2,7 +2,10 @@ const express = require('express')
 const cors = require("cors");
 const {PORT, DIR_STORAGE}=require('./config');
 const {test}= require('./config/dbc')
-
+const corsOptions = {
+    origin: "*"
+  };
+  
 
 
 class Servidor{
@@ -18,7 +21,7 @@ class Servidor{
 
     middlewares(){
         this.app.use(express.json())
-        this.app.use(cors())
+        this.app.use(cors(corsOptions))
         //this.app.use(expres)
     }
 

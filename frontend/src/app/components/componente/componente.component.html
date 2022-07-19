@@ -8,11 +8,11 @@
     <div class="app flex-row align-items-center">   
         <div class="container"> 
             <div class="card-deck row">
-                <div class="card col-md-2" *ngFor="let item of componente">
+                <div class="card col-md-3" *ngFor="let item of componente" >
                     <div class="card-block">
-                        <img class="card-img-top" [src]="item.componente_fotourl"  alt="Card image cap" width="115px" height="115px">
-                        <h5 class="card-header">{{item.componente_nombre}}</h5>
+                        <img class="card-img-top" style="height: 200px;" [src]="item.componente_fotourl"  alt="Card image cap" >
                         <div class="card-body">
+                          <h5 class="card-header">{{item.componente_nombre}}</h5>
                             <p class="card-text">Componente: {{item.tipocomponente_nombre}}</p>
                             <p class="card-text">Marca: {{item.marca_nombre}}</p>
                             <div class="grupo-botones">
