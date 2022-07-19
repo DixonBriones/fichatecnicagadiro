@@ -25,7 +25,7 @@
               <td>{{item.empleado_nombre}} {{item.empleado_apellido}}</td>
               <td>{{item.mantenimiento_observacion}}</td>
               <td>
-                  <button class="btn btn-secondary" (click)="GetMantenimiento(item.mantenimiento_id)" data-bs-toggle="modal" data-bs-target="#formModalModificar" >Modificar</button>
+                  <button class="btn btn-primary" (click)="GetMantenimiento(item.mantenimiento_id)" data-bs-toggle="modal" data-bs-target="#formModalModificar" >Modificar</button>
                   <button class="btn btn-danger" (click)="DeleteMantenimiento(item.mantenimiento_id)"  >Eliminar</button>
               </td>
             </tr>

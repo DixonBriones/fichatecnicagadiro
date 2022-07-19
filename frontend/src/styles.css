@@ -1,4 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
-.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+.btn-primary, .btn-primary:hover,  .btn-primary:active, .btn-primary:visited {
     background-color: #65478b !important;
+    border: #65478b;
+}
+
+.btn-danger, .btn-danger:hover, .btn-danger:active, .btn-danger:visited {
+    
+    background-color: #c35962 !important;
+    border: #c35962;
+}
+
+.btn-secondary, .btn-secondary:hover, .btn-secondary:active, .btn-secondary:visited {
+    background-color: #c35962 !important;
+    border: #c35962;
 }
